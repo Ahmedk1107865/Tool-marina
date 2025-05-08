@@ -1,10 +1,19 @@
-import os,sys,platform
+import os
+import platform
+
 bit = platform.architecture()[0]
+
 if bit == '64bit':
-    os.system('chmod +x marina')
-    os.system('./marina')
+    binary = 'marina'
 elif bit == '32bit':
-    os.system('chmod +x marina32')
-    os.system('./marina32')
+    binary = 'marina32'
 else:
-    print('device not supported')
+    print('Device not supported')
+    sys.exit(1)
+
+if os.path.isfile(binary):
+    os.system(f'chmod +x {binary}')
+    os.system(f'./{binary}')
+else:
+    print(f'{binary} not found in the current directory')
+    
